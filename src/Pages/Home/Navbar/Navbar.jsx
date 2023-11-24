@@ -1,10 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Logo from './Logo/Logo';
+
+import { MdOutlineNotificationsActive } from 'react-icons/md';
+import { AuthContext } from '../../../components/AuthProvider/AuthProvider';
 
 const Navbar = () => {
+    const [toggle,setToggle] = useState(false)
+    const { user } = useContext(AuthContext);
+    const handleProfile = ()=>{
+       
+            
+        
+    }
     const navLinks = <>
         <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/membership">Membership</NavLink></li>
+        <li><NavLink to="/notification"> <MdOutlineNotificationsActive className='text-2xl' /></NavLink></li>
         <li><NavLink to="/login">Login</NavLink></li>
     </>
     return (
@@ -16,10 +29,10 @@ const Navbar = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                           {navLinks}
+                            {navLinks}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <Logo></Logo>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -27,7 +40,33 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                {
+                                user && <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img src={user.photoURL}  onClick= {()=>setToggle(!toggle)}/>
+                                </div>
+                            </label>
+    
+                            }
+               
+                    {
+                        toggle ? <div className='absolute top-10'>
+                            <div>
+                                hello
+                            </div>
+                            
+                        </div>
+                     : ''
+                    }
+                    
+                    {/* {
+                        user && <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img src={user.photoURL}  onClick={handleProfile} />
+                            </div>
+                        </label>
+
+                    } */}
                 </div>
             </div>
         </div>

@@ -28,6 +28,11 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth,googleProvider)
     }
 
+    const googleSingIn = ()=>{
+        setLoading(true)
+        return signInWithPopup(auth,googleProvider)
+    } 
+
     const singOut = ()=>{
         setLoading(true)
         return signOut(auth)
@@ -71,7 +76,8 @@ const AuthProvider = ({children}) => {
         singIn,
         singOut,
         updatedUser,
-        googleSignIn
+        googleSignIn,
+        googleSingIn
 
     }
     return (

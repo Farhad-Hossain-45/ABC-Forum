@@ -1,11 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import  './Banner.css'
 
 const Banner = () => {
+    
     return (
-        <div className='h-[250px] bg-sky-500'>
-            <h2>this is banner</h2>
+        <div>
+        <div id='banner-bg' className='h-[450px] mb-12 relative' >
+
         </div>
+        <div className='absolute lg:bottom-56 lg:left-96 md:bottom-1 md:left-20 bottom-1'>
+            <h1 className='md:text-4xl text-xl font-black mb-10 ml-8 md:ml-0'>I Grow By Helping People In Need</h1>
+           <form>
+           <input type="text" name="text" id="" placeholder='Search here....'  className='bg-white py-1.5 px-10 rounded-s-lg border-x-4 border-y-4 md:ml-32 ml-8'/>
+            <button type='submit' className='bg-[#FF444A] text-white px-3 py-2 rounded-e-lg'>Search</button>
+           </form>
+        </div>
+    </div>
     );
 };
 
