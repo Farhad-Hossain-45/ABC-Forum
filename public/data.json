@@ -1,20 +1,21 @@
 [
-    {
-        "authorName": "Elena Rodriguez",
-        "authorImage": "https://example.com/elena_rodriguez.jpg",
+    {   "id" : 1,
+        "authorName": "Shakib Khan",
+        "authorImage": "https://i.ibb.co/55tBhWB/shakib-khan.webp",
         "postTitle": "Exploring the Wonders of Machine Learning",
         "postDescription": "In this post, we delve into the fascinating world of machine learning and its applications. Join us on a journey of discovery!",
         "tag": "data science",
         "time": "2023-11-27T12:30:00Z"
       },
-      {
+      {  "id" : 2,
         "authorName": "Alex Turner",
         "authorImage": "https://example.com/alex_turner.jpg",
         "postDescription": "In this post, we delve into the fascinating world of machine learning and its applications. Join us on a journey of discovery!",
         "tag":"technology",
+        "postTitle": "The Art of Photography",
         "time": "2023-11-27T12:30:00Z"
       },
-      {
+      { "id" : 3,
         "authorName": "John Doe",
         "authorImage": "https://example.com/john_doe.jpg",
         "postTitle": "The Art of Photography",
@@ -22,7 +23,7 @@
         "tag": "photography",
         "time": "2023-11-27T14:00:00Z"
       },
-      {
+      { "id" : 4,
         "authorName": "Alex Turner",
         "authorImage": "https://example.com/alex_turner.jpg",
         "postTitle": "Healthy Cooking for Busy Lives",
