@@ -1,18 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from './Logo/Logo';
 
 import { MdOutlineNotificationsActive } from 'react-icons/md';
 import { AuthContext } from '../../../components/AuthProvider/AuthProvider';
 
+
 const Navbar = () => {
     const [toggle,setToggle] = useState(false)
-    const { user } = useContext(AuthContext);
-    const handleProfile = ()=>{
-       
-            
-        
+    const { user,singOut } = useContext(AuthContext);
+    const handleLogout = ()=>{
+        singOut()
+        .then()
+        .catch()
     }
     const navLinks = <>
         <li><NavLink to="/">Home</NavLink></li>
@@ -48,14 +49,24 @@ const Navbar = () => {
                             </label>
     
                             }
-               
+                                
                     {
-                        toggle ? <div className='absolute top-10'>
-                            <div>
-                                hello
-                            </div>
+                        toggle ? <div className='absolute top-16 z-[10]'>
+                           {
+                            user &&  <div className='shadow-xl bg-white w-52 h-40'>
+                            <h2 className='font-semibold text-xl text-center'>{user && user.displayName}</h2>
+                            <Link to='/dashboard/myProfile'>
+                                <h2 className='btn btn-ghost flex justify-center mt-2  '>DASHBOARD</h2>
+                            </Link>
+                            <Link to='/login'>
+                                <h2 onClick={handleLogout} className='btn btn-ghost flex justify-center mt-2 '>LOGOUT</h2>
+                            </Link>
                             
                         </div>
+                           }
+                            
+                        </div>
+                        
                      : ''
                     }
                     

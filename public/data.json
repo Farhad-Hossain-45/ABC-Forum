@@ -1,0 +1,38 @@
+[
+    {
+        "authorName": "Elena Rodriguez",
+        "authorImage": "https://example.com/elena_rodriguez.jpg",
+        "postTitle": "Exploring the Wonders of Machine Learning",
+        "postDescription": "In this post, we delve into the fascinating world of machine learning and its applications. Join us on a journey of discovery!",
+        "tag": "data science",
+        "time": "2023-11-27T12:30:00Z"
+      },
+      {
+        "authorName": "Alex Turner",
+        "authorImage": "https://example.com/alex_turner.jpg",
+        "postDescription": "In this post, we delve into the fascinating world of machine learning and its applications. Join us on a journey of discovery!",
+        "tag":"technology",
+        "time": "2023-11-27T12:30:00Z"
+      },
+      {
+        "authorName": "John Doe",
+        "authorImage": "https://example.com/john_doe.jpg",
+        "postTitle": "The Art of Photography",
+        "postDescription": "Explore the beauty of photography and learn how to capture unforgettable moments through the lens.",
+        "tag": "photography",
+        "time": "2023-11-27T14:00:00Z"
+      },
+      {
+        "authorName": "Alex Turner",
+        "authorImage": "https://example.com/alex_turner.jpg",
+        "postTitle": "Healthy Cooking for Busy Lives",
+        "postDescription": "Discover quick and nutritious recipes for busy individuals seeking a healthy lifestyle.",
+        "tag": "cooking",
+        "time": "2023-11-28T11:45:00Z"
+      }
+      
+      
+      
+
+      
+]

@@ -1,116 +1,127 @@
-/* eslint-disable no-unused-vars */
-import { updateProfile } from 'firebase/auth';
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../components/AuthProvider/AuthProvider';
-import { ToastContainer, toast } from 'react-toastify';
-import registerImage from '../../assets/loginimage-removebg-preview.png'
+
+
+import { useContext } from "react";
+import { AuthContext } from "../../components/AuthProvider/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
+
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const Register = () => {
-    const [error,setError] = useState('')
-    const {createUser,logOut} = useContext(AuthContext)
-  
-    const handelRegister = e => {
-      e.preventDefault()
-      const form = new FormData(e.currentTarget)
-      const name = form.get('name')
-      const photo = form.get('photo')
-      const email = form.get('email')
-      const password = form.get('password')
-      setError('')
-      // console.log(name,photo,email,password)
-      createUser(email,password)
-      .then(result => {
-        logOut()
-        console.log(result.user)
-        updateProfile(result.user,{
-          displayName: name,
-          photoURL: photo
+
+  const { createUser,  } = useContext(AuthContext)
+  const axiosPublic = useAxiosPublic()
+  const navigate = useNavigate()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = async(data) => {
+    console.log(data)
+
+    const imageFile = {image: data.photo[0]}
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+            
         })
-        .then(()=>{
-  
-        })
-        .catch((error)=>{
-          console.error(error)
-        })
+        console.log(res.data.data.display_url)
+     
+    const email = data.email
+    const password = data.password
+    // const photo = data.PhotoUrl
+    // const name = data.name
+
+  createUser(email, password)
+    .then(result => {
+     const  name = data.name
+     const photo = res.data.data.display_url
+
+      console.log(result.user)
+
+      updateProfile(result.user,{
+        displayName:name,
+        photoURL:photo,
       })
-      .catch(error => {
+      .then(()=>{
+
+      })
+      .catch(error =>{
         console.error(error)
       })
-      if(password.length < 6){
-        setError('please provide 6 characters or longer');
-        return
-      }
-      else if(!/[A-Z]/.test(password)){
-        setError('You should have a uppercase')
-        return
-      }
-      else if(!/[!@#$%^&*()_+{}/[\]:;<>,.?~\\|]/.test(password)){
-        setError('You should have a special character')
-        return
-      }
-      
-      toast('Register Successfully')
-    }
-    return (
-        <div>
-        <h3 className='text-center text-4xl font-semibold mt-8'>Please Register!!!</h3>
-         <div className='flex md:flex-row flex-col'>
-             <div className='flex-1'>
-                 <img src={registerImage} className='' alt="" />
-             </div>
-             <div className='flex-1'>
-             <div className=" bg-amber-100-100 mt-3">
-       
-       <div className="hero-content">
-         
-         <div className="static card flex-shrink-0 w-full max-w-sm shadow-2xl">
-           <form onSubmit={handelRegister} className="card-body">
-           <div className="form-control">
-               <label className="label">
-                 <span className="label-text">Name</span>
-               </label>
-               <input type="text" placeholder="name" name='name' className="input input-bordered" required />
-             </div>
-           <div className="form-control">
-               <label className="label">
-                 <span className="label-text">Photo URL</span>
-               </label>
-               <input type="url" placeholder="photo URL" name='photo' className="input input-bordered" required />
-               
-             </div>
-             <div className="form-control">
-               <label className="label">
-                 <span className="label-text">Email</span>
-               </label>
-               <input type="email" placeholder="email" name='email' className="input input-bordered" required />
-             </div>
-             <div className="form-control">
-               <label className="label">
-                 <span className="label-text">Password</span>
-               </label>
-               <input type="password" placeholder="password" name='password' className="input input-bordered" required />
-               <label className="label">
-                 
-               </label>
-               {
-                 error && <p className="text-xl text-red-700">{error}</p>
-               }
-             </div>
-             <div className="form-control mt-6">
-               <button className="btn">Register</button>
-             </div>
-           </form>
-               <ToastContainer></ToastContainer>
-           <p className="text-center mb-10">Do not Have An Account ?<Link  className="text-blue-500 underline" to="/login" >Login</Link></p>
-         </div>
-       </div>
-      
-     </div>
-             </div>
-         </div>
-       </div>
-    );
+        .then(() => {
+
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            role:"bronze"
+
+          }
+          axiosPublic.post('/users', userInfo)
+            .then(res => {
+              console.log(res.user)
+              if (res.data.insertedId) {
+
+                Swal.fire("Successfully signed up ");
+                navigate("/")
+              }
+
+            })
+
+        })
+
+    })
+  }
+
+  
+  return (
+    <div  className="flex justify-center">
+      <div id="background">
+        <div className='border-2  w-[350px] h-[560px] md:h-[680px] mb-6 mt-6 md:w-[500px] p-5
+         md:p-10 bg-white bg-opacity-50 hover:border-blue-500 hover:shadow-2xl  rounded-md' >
+          <h2 className='text-5xl font-bold text-blue-600'>Register here</h2>
+
+          <form onSubmit={handleSubmit(onSubmit)} className=' w-40 h-80 relative'>
+            <h3 className='text-white text-lg font-medium'>Email</h3>
+            <input className='pl-2  rounded-md py-2 w-[300px] border md:w-[400px] text-lg'
+              {...register("email", { required: true })} type="email" placeholder='Email' id="" />
+            {errors.email && <span className="mt-2 text-red-600">Email is required </span>}
+
+
+            <h3 className='text-white text-lg  font-medium'>Password</h3>
+            <input className='pl-2 border rounded-md py-2 w-[300px] md:w-[400px]  text-lg '
+              {...register("password", { required: true })} type="password" placeholder='Password' id="" />
+            {errors.password && <span className="mt-2 text-red-600 ">password is required </span>}
+
+            <h3 className='text-white text-lg  font-medium'>Profile Picture</h3>
+            <input className='pl-2 border rounded-md py-2 w-[300px] md:w-[400px]   text-lg '
+              {...register("photo", { required: true })} type="file" placeholder='Password' id="" />
+            {errors.photo && <span className="mt-2 text-red-600 ">picture is required </span>}
+
+
+            <h3 className='text-white text-lg  font-medium'>Full Name</h3>
+            <input className='pl-2 rounded-md py-2 w-[300px] border md:w-[400px] text-lg'
+              {...register("name", { required: true })} type="text" placeholder='Full Name' id="" />
+            {errors.name && <span className="mt-2 text-red-600 w-full">Name is required </span>}
+            <p className=' mt-2 mb-6 w-[300px] '>Already have an account? <Link className='font-semibold text-blue-500 underline' to="/login">Login</Link></p>
+
+            <button className="btn w-[300px] md:w-[400px] bg-blue-500 text-white rounded-md hover:text-black hover:bg-blue-300  text-lg font-semibold">Register</button>
+             {/* <GoogleLogin></GoogleLogin> */}
+          </form>
+        </div>
+      </div>
+
+    </div>
+  );
 };
 
 export default Register;
