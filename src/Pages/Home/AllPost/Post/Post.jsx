@@ -6,23 +6,23 @@ import { Link } from 'react-router-dom';
 // import Tag from '../../AllTags/Tag/Tag';
 
 const Post = ({item}) => {
-    const {tag,id,authorName,authorImage,time,postTitle} = item || {}
+    const {tag,_id, title,name,email,photo,time} = item || {}
     return (
-        <Link to={`/post/${id}`}>
+        <Link to={`/post/${_id}`}>
             <div className='border border-sky-400 w-[500px] h-[170px]'>
             <div className='flex justify-evenly w-2/3'>
             <div>
                 <div  className='flex items-center gap-2'>
                     <div>
-                        <img className='w-[50px] h-[40px] rounded-xl' src={authorImage} alt="" />
+                        <img className='w-[50px] h-[40px] rounded-xl' src={photo} alt="" />
                     </div>
                     <div>
-                        <h2 className='font-bold'>{authorName}</h2>
+                        <h2 className='font-bold'>{name}</h2>
                         <h2>{time}</h2>
                     </div>
                 </div>
                     <div>
-                        <h2>{postTitle}</h2>
+                        <h2>{title}</h2>
                     </div>
                     <h2>#{tag}</h2>
             </div>

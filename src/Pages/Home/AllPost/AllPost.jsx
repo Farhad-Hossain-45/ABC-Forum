@@ -5,7 +5,7 @@ import Post from './Post/Post';
 const AllPost = () => {
     const [AllPost, setAllPost] = useState([])
     useEffect(()=>{
-        fetch('/data.json')
+        fetch('http://localhost:5000/post')
         .then(res=>res.json())
         .then(data=>{
             setAllPost(data)

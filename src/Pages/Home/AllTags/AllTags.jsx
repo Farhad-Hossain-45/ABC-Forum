@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { data } from 'autoprefixer';
+
 import React, { useEffect, useState } from 'react';
 import Tag from './Tag/Tag';
 
 const AllTags = () => {
     const [tags,setTags] = useState([])
     useEffect(()=>{
-        fetch('/data.json')
+        fetch('http://localhost:5000/post')
         .then(res=> res.json())
         .then(data=>{
             setTags(data)
