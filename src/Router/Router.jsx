@@ -11,6 +11,8 @@ import Dashboard from '../Pages/Home/Dashboard/Dashboard';
 import MyProfile from '../Pages/Home/Dashboard/MyProfile/MyProfile';
 import AddPost from '../Pages/Home/Dashboard/AddPost';
 import MyPost from '../Pages/Home/Dashboard/MyPost';
+import PostDetails from '../components/PostDetails/PostDetails';
+
 
 
 const Router = createBrowserRouter([
@@ -37,6 +39,11 @@ const Router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/post/:id',
+                element: <PostDetails></PostDetails>,
+                loader: ({params}) =>fetch(`/data.json/${params.id}`)
             }
         ]
     },

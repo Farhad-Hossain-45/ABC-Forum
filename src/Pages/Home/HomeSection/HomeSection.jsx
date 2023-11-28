@@ -5,7 +5,7 @@ import AllTags from '../AllTags/AllTags';
 
 const HomeSection = () => {
     return (
-        <div>
+        <div className='mb-8'>
             <div className='flex justify-evenly'>
                 <div className=' w-2/3'>
             <h2 className='text-center font-bold text-2xl mb-4'>ALL POST</h2>
