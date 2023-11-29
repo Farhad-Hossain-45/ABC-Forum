@@ -3,6 +3,7 @@ import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
+    const isAdmin = true;
     return (
         <div className="max-w-6xl mx-auto">
             <div className="flex">
@@ -12,11 +13,16 @@ const Dashboard = () => {
                         
                            
                            
-                        <li ><NavLink to="/dashboard/myProfile"> My Profile</NavLink></li>
-    
-                        <li ><NavLink to="/dashboard/addPost">Add Post</NavLink></li>
-
-                        <li ><NavLink to="/dashboard/myPost">My Posts</NavLink></li>
+                        {
+                            isAdmin ? <>
+                            <li><NavLink to="/dashboard/adminProfile">Admin Profile</NavLink></li>
+                            <li><NavLink to="/dashboard/manageUsers">Manage Users</NavLink></li>
+                            <li><NavLink to="/dashboard/activities">Activities</NavLink></li>
+                            <li><NavLink to="/dashboard/announcement">Announcement</NavLink></li>
+                            </>:
+                            
+                            <><li><NavLink to="/dashboard/myProfile"> My Profile</NavLink></li><li><NavLink to="/dashboard/addPost">Add Post</NavLink></li><li><NavLink to="/dashboard/myPost">My Posts</NavLink></li></>
+                        }
 
                         
                         

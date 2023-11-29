@@ -67,6 +67,8 @@ const AddPost = () => {
                                 <option value="technology">Technology</option>
                                 <option value="photography">Photography</option>
                                 <option value="dataScience">Data Science</option>
+                                <option value="javascript">Javascript</option>
+                                <option value="python">Python</option>
                             </select>
                         </div>
                         
