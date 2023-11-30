@@ -5,22 +5,21 @@ import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../../components/AuthProvider/AuthProvider';
 import { toast } from 'react-toastify';
 import loginImage from '../../assets/loginimage-removebg-preview.png'
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 const Login = () => {
     const [error,setError] = useState('')
     
     const {singIn,googleSingIn} = useContext(AuthContext);
     const location = useLocation()
     const navigate = useNavigate()
-  
+  const axiosPublic = useAxiosPublic()
     const handelLogin = e => {
       e.preventDefault()
       const form = new FormData(e.currentTarget);
       const email = form.get('email')
       const password = form.get('password')
       setError('')
-      // setSuccess('')
-     
-      // console.log(email,password)
+
       singIn(email,password)
       .then(result => {
         console.log(result.user)
@@ -33,15 +32,25 @@ const Login = () => {
         
       })
       
-     
-     
-      
     }
     const handelGoogleSignIn = (e) => {
       e.preventDefault()
       googleSingIn()
       .then(result => {
         console.log(result.user)
+        const userInfo = {
+          name: result.user?.displayName,
+          email: result.user?.email,
+          photo: result.user?.photoURL,
+          reward: "bronze"
+
+
+        }
+        axiosPublic.post('/users',userInfo)
+        .then(res => {
+          console.log(res.data)
+        })
+        console.log(userInfo)
         navigate(location?.state ? location.state : '/')
        
       })
