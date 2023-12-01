@@ -5,17 +5,19 @@ import useAxiosPublic from '../../../../../hooks/useAxiosPublic';
 import { FaUsers } from 'react-icons/fa';
 import { MdDelete } from "react-icons/md";
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../../../hooks/useAxiosSecure';
 const ManageUsers = () => {
-    const axiosPublic = useAxiosPublic()
+    // const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { data: user = [],refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await axiosPublic.get('/users')
+            const res = await axiosSecure.get('/users')
             return res.data
         }
     })
     const handleMakeAdmin = (user)=>{
-        axiosPublic.patch(`/users/admin/${user._id}`)
+        axiosSecure.patch(`/users/admin/${user._id}`)
       .then(res=>{
         console.log(res.data)
         
@@ -44,7 +46,7 @@ const ManageUsers = () => {
           }).then((result) => {
             if (result.isConfirmed) {
            
-            axiosPublic.delete(`/users/${id}`)
+            axiosSecure.delete(`/users/${id}`)
             .then(res=> {
                 if(res.data.deletedCount > 0){
                     refetch()

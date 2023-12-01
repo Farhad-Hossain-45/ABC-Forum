@@ -6,6 +6,7 @@ const AdminProfile = () => {
     const [admin,setAdmin] = useState([])
     const [filterAdmin, setFilterAdmin] = useState([])
     const [totalPost, setTotalPost] = useState([])
+    const [comment, setComment] = useState([])
     // const axiosPublic = useAxiosPublic()
 
     // axiosPublic.get('/users')
@@ -37,6 +38,14 @@ const AdminProfile = () => {
             setTotalPost(data)
         })
     },[])
+    useEffect(()=>{
+        fetch('http://localhost:5000/comment')
+        .then(res=>res.json())
+        .then(data=>{
+            setComment(data)
+        })
+    },[])
+
     // console.log(totalPost)
     return (
         <div>
@@ -79,7 +88,9 @@ const AdminProfile = () => {
                                 </td>
                                 <td>{item.email}</td>
                                 <td className='font-bold text-lg'>{totalPost.length}</td>
-                                <td className='font-bold text-lg'>0</td>
+                                <td className='font-bold text-lg'>
+                                    {comment.length}
+                                </td>
                                 <th className='font-bold text-lg'>
                                     {admin.length}
                                 </th>

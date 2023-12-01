@@ -16,6 +16,7 @@ import AdminProfile from '../Pages/Home/Dashboard/AdminRoute/AdminProfile/AdminP
 import ManageUsers from '../Pages/Home/Dashboard/AdminRoute/ManageUsers/ManageUsers';
 import Activities from '../Pages/Home/Dashboard/AdminRoute/Activities/Activities';
 import Announcement from '../Pages/Home/Dashboard/AdminRoute/Announcement/Announcement';
+import Error from '../Pages/Error/Error';
 
 
 
@@ -23,6 +24,7 @@ const Router = createBrowserRouter([
     {
         path: '/',
         element: <Layout></Layout>,
+        errorElement: <Error></Error>,
         children:[
             {
                 path: '/',
