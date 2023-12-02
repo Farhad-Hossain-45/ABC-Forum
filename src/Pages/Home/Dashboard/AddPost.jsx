@@ -44,7 +44,31 @@ const AddPost = () => {
             
             <div>
                 <form onSubmit={handlePost}>
+                    <div className="flex gap-3">
+                    <div className="form-control w-full mb-5">
+                        <label className="label">
+                            <span className="label-text">Your Name</span>
+                                </label>
+                        <input  type="text" defaultValue={user?.displayName} readOnly  className="input input-bordered w-full" />
 
+                    </div>
+                    <div className="form-control w-full mb-5">
+                        <label className="label">
+                            <span className="label-text">Your Email</span>
+                                </label>
+                        <input  type="text" defaultValue={user?.email} readOnly  className="input input-bordered w-full" />
+
+                    </div>
+                    </div>
+
+                    
+                    <div className="form-control w-full mb-5">
+                        <label className="label">
+                            <span className="label-text">Image</span>
+                                </label>
+                        <input type="text" defaultValue={user?.photoURL} className="input input-bordered w-full" />
+
+                    </div>
                     <div className="form-control w-full mb-5">
                         <label className="label">
                             <span className="label-text">Post Title*</span>

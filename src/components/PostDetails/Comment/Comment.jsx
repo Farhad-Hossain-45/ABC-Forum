@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
@@ -6,7 +7,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 
 
-const Comment = () => {
+const Comment = ({title}) => {
     const axiosPublic = useAxiosPublic()
     const {user} = useContext(AuthContext)
     console.log(user)
@@ -20,7 +21,8 @@ const Comment = () => {
             name: user.displayName,
             email: user.email,
             photo: user.photoURL,
-            time: addedTime
+            time: addedTime,
+            title: title
 
         }
 

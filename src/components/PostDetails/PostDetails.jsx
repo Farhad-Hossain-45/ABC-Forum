@@ -80,7 +80,7 @@ const PostDetails = () => {
             </div>
             
         </div>
-        <Comment></Comment>
+        <Comment title={title}></Comment>
         </div>
     );
 };

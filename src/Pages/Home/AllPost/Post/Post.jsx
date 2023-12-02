@@ -17,12 +17,12 @@ const Post = ({item}) => {
                         <img className='w-[50px] h-[40px] rounded-xl' src={photo} alt="" />
                     </div>
                     <div>
-                        <h2 className='font-bold'>{name}</h2>
+                        <h2 className='font-bold text-xl'>{name}</h2>
                         <h2>{time}</h2>
                     </div>
                 </div>
                     <div>
-                        <h2>{title}</h2>
+                        <h2 className='font-semibold text-lg'>{title}</h2>
                     </div>
                     <h2>#{tag}</h2>
             </div>

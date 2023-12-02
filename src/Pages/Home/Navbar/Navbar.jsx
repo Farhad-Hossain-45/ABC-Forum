@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Logo from './Logo/Logo';
 
@@ -8,6 +8,14 @@ import { AuthContext } from '../../../components/AuthProvider/AuthProvider';
 
 
 const Navbar = () => {
+    const [announcement, setAnnouncement] = useState([])
+    useEffect(()=>{
+        fetch('http://localhost:5000/announcement')
+        .then(res=>res.json())
+        .then(data=>{
+            setAnnouncement(data)
+        })
+    },[])
     const [toggle,setToggle] = useState(false)
     const { user,singOut } = useContext(AuthContext);
     const handleLogout = ()=>{
@@ -18,7 +26,7 @@ const Navbar = () => {
     const navLinks = <>
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/membership">Membership</NavLink></li>
-        <li><NavLink to="/notification"> <MdOutlineNotificationsActive className='text-2xl' /></NavLink></li>
+        <li><Link><MdOutlineNotificationsActive className='text-2xl' /> <div className="badge badge-secondary">{announcement.length}</div></Link> </li>
         <li><NavLink to="/login">Login</NavLink></li>
     </>
     return (

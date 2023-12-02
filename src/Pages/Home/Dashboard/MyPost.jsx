@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../components/AuthProvider/AuthProvider';
 import { FaComment } from 'react-icons/fa';
 import { MdDelete } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 const MyPost = () => {
     const [data, setData] = useState([])
