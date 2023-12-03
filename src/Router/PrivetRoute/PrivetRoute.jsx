@@ -18,7 +18,7 @@ const PrivetRoute = ({children}) => {
         return children
     }
     else{
-        return <Navigate to="/login" state={{from: location}} replace></Navigate>
+        return <Navigate state={location.pathname} to="/login"  replace></Navigate>
     }
    
 };

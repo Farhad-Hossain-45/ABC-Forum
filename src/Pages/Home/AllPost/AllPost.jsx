@@ -11,9 +11,13 @@ const AllPost = () => {
             setAllPost(data)
         })
     },[])
+
+    const handlePopularPost = ()=>{
+        
+    }
     return (
         <div>
-            
+            <button onClick={handlePopularPost} className='btn bg-sky-400 mb-3 text-white'>Popular Post</button>
             <div className='grid grid-cols-1 gap-5'>
             
             {

@@ -16,7 +16,7 @@ const AdminPrivetRoute = ({children}) => {
         return children
     }
     else{
-        return <Navigate to="/" state={{from: location}} replace></Navigate>
+        return <Navigate to="/dashboard/myProfile" state={{from: location}} replace></Navigate>
     }
 };
 

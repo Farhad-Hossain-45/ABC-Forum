@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { BiSolidDownvote, BiSolidUpvote } from "react-icons/bi";
 import { FaCommentAlt, FaFacebook, FaFacebookMessenger, FaTwitter } from "react-icons/fa";
@@ -10,23 +10,69 @@ import {
     FacebookMessengerShareButton
   } from "react-share";
 import Comment from './Comment/Comment';
+import { AuthContext } from '../AuthProvider/AuthProvider';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const PostDetails = () => {
     const data = useLoaderData()
-    const [upVoteCount, setUpVoteCount] = useState(0)
-
+    const { _id, title, tag, description, name, email, photo, upVote, downVote, time } = data || {}
+    const [upVoteCount, setUpVoteCount] = useState(upVote)
+    const [downVoteCount, setDownVoteCount] = useState(downVote)
+    const [voted,setVoted] = useState(null)
+    const {user} = useContext(AuthContext)
+    const axiosPublic = useAxiosPublic()
     // const [count, setCount] = useState(0)
     // const [downCount, setDownCount] = useState(0)
-    const handleUpVote=() =>{
-        if(upVoteCount === 0){
-            setUpVoteCount(1)
+    // const handleUpVote=() =>{
+    //     if(upVoteCount === 0){
+    //         setUpVoteCount(1)
+    //     }
+    //     else{
+    //         setUpVoteCount(0)
+    //     }
+    // }
+    const handleUpVote = async()=>{
+        if(voted !== "up" && user){
+            setUpVoteCount(upVoteCount +1)
+            setDownVoteCount(downVoteCount)
+            setVoted("up")
+            const upVoteInfo={
+                upVote: upVoteCount +1
+
+            }
+            const updatedVote = await axiosPublic.patch(`/post/upvote/${_id}`, upVoteInfo)
+            console.log(updatedVote)
+        }else if( voted === "up"){
+            setUpVoteCount(upVoteCount - 1);
+            setVoted(null)
         }
         else{
-            setUpVoteCount(0)
+            Swal.fire({
+                title: "Sorry",
+                text: "You need to login first",
+                icon: "error"
+            })
+        }
+    }
+    const handleDownVote = async()=>{
+        if(voted !== "down" && user){
+            setDownVoteCount(downVoteCount +1)
+            setUpVoteCount(upVoteCount)
+            setVoted("down")
+            const downVoteInfo={
+                upVote: downVoteCount +1
+
+            }
+            const updatedVote = await axiosPublic.patch(`/post/upvote/${_id}`, downVoteInfo)
+            console.log(updatedVote)
+        }else if( voted === "down"){
+            setDownVoteCount(downVoteCount - 1);
+            setVoted(null)
         }
     }
 
-    const { _id, title, tag, description, name, email, photo, upVote, downVote, time } = data || {}
+   
     // console.log(id)
     console.log(data)
 
@@ -52,9 +98,9 @@ const PostDetails = () => {
                 <h2 className='mt-2 text-center'>{description}</h2>
             </div>
             <div className='flex justify-center mt-3 gap-3'>
-                <button onClick={()=>handleUpVote()} className='btn bg-sky-400 text-white'><BiSolidUpvote /> Up Vote {upVoteCount} </button>
-                <button  className='btn bg-sky-400 text-white'><BiSolidDownvote /> Down Vote  </button>
-                <button className='btn bg-sky-400 text-white'><FaCommentAlt /> Comment </button>
+                <button onClick={handleUpVote} className='btn bg-sky-400 text-white' disabled={voted === "down"}><BiSolidUpvote /> Up Vote {upVoteCount} </button>
+                <button  onClick={handleDownVote} className='btn bg-sky-400 text-white' disabled={voted === "up"}><BiSolidDownvote /> Down Vote {downVoteCount} </button>
+                <button className='btn bg-sky-400 text-white' ><FaCommentAlt  /> Comment </button>
                 {/* <button className='btn bg-sky-400 text-white'><IoIosShareAlt /> Share </button> */}
                 {/* The button to open modal */}
                 <label htmlFor="my_modal_7" className="btn bg-sky-400 text-white"> <IoIosShareAlt /> Share</label>

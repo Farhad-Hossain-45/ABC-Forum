@@ -63,7 +63,7 @@ const Navbar = () => {
                            {
                             user &&  <div className='shadow-xl bg-white w-52 h-40'>
                             <h2 className='font-semibold text-xl text-center'>{user && user.displayName}</h2>
-                            <Link to='/dashboard/myProfile'>
+                            <Link onClick= {()=>setToggle(!toggle)} to='/dashboard/myProfile'>
                                 <h2 className='btn btn-ghost flex justify-center mt-2  '>DASHBOARD</h2>
                             </Link>
                             <Link to='/login'>

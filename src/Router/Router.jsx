@@ -17,6 +17,9 @@ import ManageUsers from '../Pages/Home/Dashboard/AdminRoute/ManageUsers/ManageUs
 import Activities from '../Pages/Home/Dashboard/AdminRoute/Activities/Activities';
 import Announcement from '../Pages/Home/Dashboard/AdminRoute/Announcement/Announcement';
 import Error from '../Pages/Error/Error';
+import PrivetRoute from './PrivetRoute/PrivetRoute';
+import AdminPrivetRoute from './AdminPrivetRoute/AdminPrivetRoute';
+
 
 
 
@@ -24,7 +27,7 @@ const Router = createBrowserRouter([
     {
         path: '/',
         element: <Layout></Layout>,
-        errorElement: <Error></Error>,
+        // errorElement: <Error></Error>,
         children:[
             {
                 path: '/',
@@ -48,9 +51,10 @@ const Router = createBrowserRouter([
             },
             {
                 path: '/post/:id',
-                element: <PostDetails></PostDetails>,
+                element: <PrivetRoute><PostDetails></PostDetails></PrivetRoute>,
                 loader: ({params}) =>fetch(`http://localhost:5000/post/${params.id}`)
-            }
+            },
+           
         ]
     },
     
@@ -74,19 +78,19 @@ const Router = createBrowserRouter([
 
                 {
                     path: 'adminProfile',
-                    element: <AdminProfile></AdminProfile>
+                    element: <AdminPrivetRoute><AdminProfile></AdminProfile></AdminPrivetRoute>
                 },
                 {
                     path: 'manageUsers',
-                    element: <ManageUsers></ManageUsers>
+                    element: <AdminPrivetRoute><ManageUsers></ManageUsers></AdminPrivetRoute>
                 },
                 {
                     path: 'activities',
-                    element: <Activities></Activities>
+                    element: <AdminPrivetRoute><Activities></Activities></AdminPrivetRoute>
                 },
                 {
                     path: 'announcement',
-                    element: <Announcement></Announcement>
+                    element: <AdminPrivetRoute><Announcement></Announcement></AdminPrivetRoute>
                 }
             ]
         }

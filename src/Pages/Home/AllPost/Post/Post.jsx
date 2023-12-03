@@ -1,14 +1,37 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 // import Tag from '../../AllTags/Tag/Tag';
 
 const Post = ({item}) => {
-    const {tag,_id, title,name,email,photo,time} = item || {}
+    const {tag,_id, title,name,email,photo,time,upVote} = item || {}
+    const [commentCount, setCommentCount] = useState([])
+    
+    const [filterCount, setFilterCount] = useState([])
+    
+    useEffect(()=>{
+        fetch('http://localhost:5000/comment')
+        .then(res=>res.json())
+        .then(data=>{
+            setCommentCount(data)
+        })
+    },[])
+    useEffect(()=>{
+        const filterValue = commentCount.filter(item=> item.title === title)
+        setFilterCount(filterValue)
+    },[commentCount, title])
+    
+    console.log(filterCount)
+    
+
+    
+    
     return (
-        <div className='border w-[500px] h-[170px] shadow-xl'>
+        <div>
+            
+            <div className='border w-[500px] h-[170px] shadow-xl'>
                 <Link to={`/post/${_id}`}>
             <div className='flex justify-evenly w-2/3'>
             <div>
@@ -31,15 +54,15 @@ const Post = ({item}) => {
             </div>
             <div className='flex justify-center gap-10 mt-3'>
                 <div>
-                    
-                    <p className='bg-gray-400 border px-10 py-2 text-white rounded-xl'>Vote Count (0)</p>
+                    <p className='bg-gray-400 border px-10 py-2 text-white rounded-xl'>Vote Count ({upVote})</p>
                     
                 </div>
                 <div>
-                    <p className='bg-gray-400 border px-10 py-2 text-white rounded-xl'>Comment Count (0)</p>
+                    <p className='bg-gray-400 border px-10 py-2 text-white rounded-xl'>Comment Count ({filterCount.length})</p>
                 </div>
             </div>
         </Link>
+        </div>
         </div>
     );
 };
