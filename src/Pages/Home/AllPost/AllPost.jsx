@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Post from './Post/Post';
 
 const AllPost = () => {
-    const [AllPost, setAllPost] = useState([])
+    const [allPost, setAllPost] = useState([])
     useEffect(()=>{
         fetch('http://localhost:5000/post')
         .then(res=>res.json())
@@ -13,7 +13,8 @@ const AllPost = () => {
     },[])
 
     const handlePopularPost = ()=>{
-        
+        const sortedPosts = [...allPost].sort((a, b) => b.upVote - a.upVote);
+        setAllPost(sortedPosts);
     }
     return (
         <div>
@@ -21,7 +22,7 @@ const AllPost = () => {
             <div className='grid grid-cols-1 gap-5'>
             
             {
-                AllPost.map(item=> <Post key={item.id} item={item}></Post>)
+                allPost.map(item=> <Post key={item.id} item={item}></Post>)
             }
         </div>
         </div>
