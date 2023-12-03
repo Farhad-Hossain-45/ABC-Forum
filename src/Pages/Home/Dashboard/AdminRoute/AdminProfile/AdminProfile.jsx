@@ -19,7 +19,7 @@ const AdminProfile = () => {
     // setFilterAdmin(adminFilter)
     // console.log(filterAdmin)
     useEffect(()=>{
-        fetch('http://localhost:5000/users')
+        fetch('https://final-assignment-server-sage.vercel.app/users')
         .then(res=>res.json())
         .then(data=>{
             setAdmin(data)
@@ -32,14 +32,14 @@ const AdminProfile = () => {
     },[admin])
     // console.log(filterAdmin)
     useEffect(()=>{
-        fetch('http://localhost:5000/post')
+        fetch('https://final-assignment-server-sage.vercel.app/post')
         .then(res=>res.json())
         .then(data=>{
             setTotalPost(data)
         })
     },[])
     useEffect(()=>{
-        fetch('http://localhost:5000/comment')
+        fetch('https://final-assignment-server-sage.vercel.app/comment')
         .then(res=>res.json())
         .then(data=>{
             setComment(data)

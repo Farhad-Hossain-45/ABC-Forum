@@ -5,7 +5,7 @@ import Extra from './Extra';
 const ExtraSection = () => {
     const [data,setData] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/announcement')
+        fetch('https://final-assignment-server-sage.vercel.app/announcement')
         .then(res=>res.json())
         .then(data=>{
             setData(data)

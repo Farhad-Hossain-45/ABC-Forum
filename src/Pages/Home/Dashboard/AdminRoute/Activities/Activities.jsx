@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 const Activities = () => {
     // const [data,setData] = useState([])
     // useEffect(()=>{
-    //     fetch('http://localhost:5000/comment')
+    //     fetch('https://final-assignment-server-sage.vercel.app/comment')
     //     .then(res=>res.json())
     //     .then(data=>{
     //         setData(data)

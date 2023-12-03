@@ -6,7 +6,7 @@ import Tag from './Tag/Tag';
 const AllTags = () => {
     const [tags,setTags] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/post')
+        fetch('https://final-assignment-server-sage.vercel.app/post')
         .then(res=> res.json())
         .then(data=>{
             setTags(data)

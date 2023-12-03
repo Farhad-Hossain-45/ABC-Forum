@@ -12,7 +12,7 @@ const MyPost = () => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/post?email=${user?.email}`)
+        fetch(`https://final-assignment-server-sage.vercel.app/post?email=${user?.email}`)
 
             .then(res => res.json())
             .then(data => {

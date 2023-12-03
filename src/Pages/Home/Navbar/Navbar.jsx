@@ -10,7 +10,7 @@ import { AuthContext } from '../../../components/AuthProvider/AuthProvider';
 const Navbar = () => {
     const [announcement, setAnnouncement] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/announcement')
+        fetch('https://final-assignment-server-sage.vercel.app/announcement')
         .then(res=>res.json())
         .then(data=>{
             setAnnouncement(data)

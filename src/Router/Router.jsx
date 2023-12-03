@@ -52,7 +52,7 @@ const Router = createBrowserRouter([
             {
                 path: '/post/:id',
                 element: <PrivetRoute><PostDetails></PostDetails></PrivetRoute>,
-                loader: ({params}) =>fetch(`http://localhost:5000/post/${params.id}`)
+                loader: ({params}) =>fetch(`https://final-assignment-server-sage.vercel.app/post/${params.id}`)
             },
            
         ]

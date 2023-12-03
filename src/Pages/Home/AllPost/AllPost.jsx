@@ -5,7 +5,7 @@ import Post from './Post/Post';
 const AllPost = () => {
     const [allPost, setAllPost] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/post')
+        fetch('https://final-assignment-server-sage.vercel.app/post')
         .then(res=>res.json())
         .then(data=>{
             setAllPost(data)
