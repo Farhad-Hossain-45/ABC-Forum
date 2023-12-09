@@ -1,8 +1,11 @@
-# React + Vite
+## 5 Project features.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1.I have created this website based on ABC FORUM, with responsive to desktop, tablet and mobile. So that the user can use it very easily from any device.
 
-Currently, two official plugins are available:
+2.I added dark and light mode toggle function and set this function in navbar so user can easily use it from any page.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3.User can toggle between login and register page.
+
+4.User can see specific brand product by clicking their brand name.
+
+5.User can see product details by clicking on details button.
